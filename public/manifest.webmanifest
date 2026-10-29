@@ -1,0 +1,15 @@
+{
+  "name": "Fox Drive · Suivi de flotte",
+  "short_name": "Fox Drive",
+  "description": "Suivi des vérifications mensuelles de la flotte.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f3f3f5",
+  "theme_color": "#f3f3f5",
+  "lang": "fr",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

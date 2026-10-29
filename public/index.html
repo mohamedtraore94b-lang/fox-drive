@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fox Drive · Suivi de flotte</title>
+<meta name="theme-color" content="#f3f3f5">
+<meta name="robots" content="noindex, nofollow">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body class="locked">
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13l1.5-4.5C4.8 7.6 5.6 7 6.6 7h10.8c1 0 1.8.6 2.1 1.5L21 13"/><rect x="2.5" y="13" width="19" height="5.5" rx="1.5"/><circle cx="6.5" cy="18.5" r="1.6"/><circle cx="17.5" cy="18.5" r="1.6"/></svg></div>
+    <div><div class="brand-t">Fox Drive</div><div class="brand-s">FLOTTE · RUNGIS</div></div>
+  </div>
+  <nav class="nav" id="nav" aria-label="Navigation"></nav>
+  <div class="top-actions"><button class="btn btn-sm" id="btn-gear" data-act="go" data-v="settings" aria-label="Réglages" title="Réglages"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></svg></button><button class="btn btn-sm" data-act="logout">Déconnexion</button></div>
+</header>
+
+<main>
+  <section id="v-dash"></section>
+
+  <section id="v-drivers" hidden>
+    <div class="hero"><div><h1>Chauffeurs</h1><div class="sub">Tous les chauffeurs suivis, leurs véhicules et leurs échéances.</div></div></div>
+    <div class="toolbar">
+      <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="q" class="input" type="search" placeholder="Chauffeur, plaque, véhicule…" autocomplete="off"></div>
+      <select id="sort" class="input" style="width:auto" aria-label="Trier">
+        <option value="due">Trier : échéance</option><option value="name">Trier : nom</option><option value="plate">Trier : plaque</option>
+      </select>
+      <button class="btn" id="btn-sel" data-act="toggle-sel"></button>
+      <button class="btn" id="btn-selall" data-act="sel-all" hidden>Tout sélectionner</button>
+      <button class="btn" data-act="export-xlsx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12"/><path d="m7 11 5 5 5-5"/><path d="M4 20h16"/></svg><span>Excel</span></button>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div class="list" id="list"></div>
+  </section>
+
+  <section id="v-vehicles" hidden>
+    <div class="hero"><div><h1>Véhicules</h1><div class="sub">La flotte par marque et modèle.</div></div></div>
+    <div class="toolbar">
+      <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="vq" class="input" type="search" placeholder="Marque, modèle, chauffeur, plaque…" autocomplete="off"></div>
+      <button class="btn" id="btn-sel-v" data-act="toggle-sel"></button>
+    </div>
+    <div id="vlist"></div>
+  </section>
+
+  <section id="v-sync" hidden></section>
+  <section id="v-campaigns" hidden></section>
+  <section id="v-agent" hidden></section>
+  <section id="v-settings" hidden></section>
+
+  <section id="v-log" hidden>
+    <div class="hero"><div><h1>Journal</h1><div class="sub">Chaque changement de véhicule, arrivée, départ, numéro, message ou réponse, avec la date et l'heure.</div></div></div>
+    <div class="chips" id="log-chips" style="margin-top:18px"></div>
+    <div class="tl" id="log-list"></div>
+  </section>
+</main>
+
+<nav class="tabbar" id="tabbar" aria-label="Navigation mobile"></nav>
+
+<div class="bulkbar" id="bulkbar">
+  <span id="bulk-n">0 sélectionné</span>
+  <button class="btn btn-sm" data-act="sel-clear">Vider</button>
+  <button class="btn btn-wa btn-sm" data-act="bulk-open">Envoyer un message</button>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<input type="file" id="in-fox" accept=".xlsx,.xls,.csv,.txt" hidden>
+<input type="file" id="in-contacts" accept=".xlsx,.xls,.csv,.txt,.vcf" hidden>
+<input type="file" id="in-backup" accept=".json" hidden>
+
+<script src="/glass.js"></script>
+<script type="module">
+import * as L from "/lib.js";
+Object.assign(window, L);
+await import("/app.js");
+</script>
+</body>
+</html>
